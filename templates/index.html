@@ -5,12 +5,19 @@
   </head>
   <body>
 
-    <form action="/test" method="get">
-      <button name="get_value" value="from get">get submit</button>
-    </form>
 
-    <form action="/test" method="post">
-      <button name="post_value" value="from post">post submit</button>
+
+    <form action="/recommend" method="post">
+      　日付：<input type="date" name="date" value={{today}}><br/>
+      文字数：<input type="number" name="num_char" value="2"/><br/>
+      頻出数：<input type="number" name="word_count" value="20"/><br/>
+      サイト：<select name="sites">
+              <option value="all_urls">yahoo</option>
+              <option value="all_navers">naver</option>
+              <option value="hatebo_urls">hatenabookmark</option>
+
+              </select><br/>
+      <input type="submit" value="単語閲覧" />
     </form>
 
   </body>
