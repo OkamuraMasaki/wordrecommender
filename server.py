@@ -16,7 +16,7 @@ import pandas as pd
 
 from flask import Flask, render_template, request
 import os
-
+env = os.getenv("RECOMMENDER_ENV","development")
 crawl_address = os.getenv("CRAWL_ADDRESS")
 r = redis.StrictRedis(host=crawl_address, port=6379, db=0)
 app = Flask(__name__)
@@ -63,5 +63,7 @@ def recommend():
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run(debug=True,host='0.0.0.0')
+    if env != "production":
+      app.run(debug=True,host='0.0.0.0',port=5000)
+    else:
+      app.run(debug=False,host='0.0.0.0',port=5000)
