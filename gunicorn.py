@@ -5,7 +5,8 @@ bind = 'unix:/tmp/gunicorn_my_app.sock'
 backlog = 2048
 
 # Worker Processes
-workers = multiprocessing.cpu_count() * 2 + 1
+workers = 1
+#workers = multiprocessing.cpu_count() * 2 + 1
 worker_class = 'sync'
 worker_connections = 1000
 max_requests = 0
@@ -15,7 +16,7 @@ debug = False
 spew = False
 
 # Logging
-logfile = '/var/www/apps/sampleapp/app.log'
+logfile = '/var/www/wordrecommender/app.log'
 loglevel = 'info'
 logconfig = None
 
