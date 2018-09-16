@@ -5,16 +5,23 @@
   </head>
   <body>
 
-
-
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
     <form action="/recommend" method="post">
-      　日付：<input type="date" name="date" value={{today}}><br/>
-      文字数：<input type="number" name="num_char" value="2"/><br/>
-      頻出数：<input type="number" name="word_count" value="20"/><br/>
+      　日付：<input type="date" name="date" value="{{today}}"><br/>
+      文字数：<input type="number" name="num_char" value="{{num}}"/><br/>
+      頻出数：<input type="number" name="word_count" value="{{count}}"/><br/>
       サイト：<select name="sites">
-              <option value="all_urls">yahoo</option>
-              <option value="all_navers">naver</option>
-              <option value="hatebo_urls">hatenabookmark</option>
+              <option {{"selected" if sites == "all_urls"}} value="all_urls">yahoo</option>
+              <option {{"selected" if sites == "all_navers"}} value="all_navers">naver</option>
+              <option {{"selected" if sites == "hatebo_urls"}} value="hatebo_urls">hatenabookmark</option>
 
               </select><br/>
       <input type="submit" value="単語閲覧" />
