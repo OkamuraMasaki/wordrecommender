@@ -20,6 +20,8 @@ env = os.getenv("RECOMMENDER_ENV","development")
 crawl_address = os.getenv("CRAWL_ADDRESS")
 r = redis.StrictRedis(host=crawl_address, port=6379, db=0)
 app = Flask(__name__)
+app.secret_key = 'hogeshu'
+app.config['SESSION_TYPE'] = 'filesystem'
 @app.route('/')
 def index():
     today = datetime.today().strftime("%Y-%m-%d")
@@ -55,8 +57,10 @@ def recommend():
         word=df["word"]
         y_pos = np.arange(len(word))
 
-        fig, ax = plt.subplots(figsize=(4,len(word)/6))
+        fig, ax = plt.subplots(figsize=(8,len(word)/3))
         ax.barh(y_pos,df["word_count"],height=0.5)
+	for i, v in enumerate(df["word_count"]):
+          ax.text(v + 3, i + .25, str(v), color='blue', fontweight='bold')
         ax.set_yticks(y_pos)
         ax.set_yticklabels(word)
         #ax.set_ylabel(word)
@@ -70,8 +74,6 @@ def recommend():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'hogeshu'
-    app.config['SESSION_TYPE'] = 'filesystem'
     if env != "production":
       app.run(debug=True,host='0.0.0.0',port=5000)
     else:
