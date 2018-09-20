@@ -59,7 +59,7 @@ def recommend():
 
         fig, ax = plt.subplots(figsize=(8,len(word)/3))
         ax.barh(y_pos,df["word_count"],height=0.5)
-	for i, v in enumerate(df["word_count"]):
+        for i, v in enumerate(df["word_count"]):
           ax.text(v + 3, i + .25, str(v), color='blue', fontweight='bold')
         ax.set_yticks(y_pos)
         ax.set_yticklabels(word)
